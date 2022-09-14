@@ -1,3 +1,5 @@
+package com.tw.step8.assignment1;
+
 public class Square {
 
   private final double side;

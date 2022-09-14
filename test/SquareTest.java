@@ -1,3 +1,4 @@
+import com.tw.step8.assignment1.Square;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
