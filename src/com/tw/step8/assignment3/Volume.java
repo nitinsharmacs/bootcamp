@@ -1,5 +1,7 @@
 package com.tw.step8.assignment3;
 
+import com.tw.step8.assignment3.Unit.VolumeUnit;
+
 import java.util.Objects;
 
 public class Volume {
@@ -11,12 +13,12 @@ public class Volume {
     this.subMeasure = subMeasure;
   }
 
-  public static Volume create(double value1, Unit unit1, double value2, Unit unit2) {
+  public static Volume create(double value1, VolumeUnit unit1, double value2, VolumeUnit unit2) {
     return new Volume(new Measure(value1, unit1), new Measure(value2, unit2));
   }
 
-  public static Volume create(double value, Unit unit) {
-    return new Volume(new Measure(value, unit), new Measure(0, Unit.GAL));
+  public static Volume create(double value, VolumeUnit unit) {
+    return new Volume(new Measure(value, unit), new Measure(0, VolumeUnit.GAL));
   }
 
   public int compare(Volume anotherVolume) {
@@ -28,9 +30,9 @@ public class Volume {
   }
 
   public Volume add(Volume volume2) {
-    Measure superMeasure = new Measure(this.toLiter() + volume2.toLiter(), Unit.LT);
+    Measure superMeasure = new Measure(this.toLiter() + volume2.toLiter(), VolumeUnit.LT);
 
-    return new Volume(superMeasure, new Measure(0, Unit.LT));
+    return new Volume(superMeasure, new Measure(0, VolumeUnit.LT));
   }
 
   @Override
