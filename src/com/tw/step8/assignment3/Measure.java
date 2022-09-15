@@ -10,7 +10,7 @@ public class Measure {
     this.unit = unit;
   }
 
-  public double toMM() {
+  public double evaluate() {
     return this.value * this.unit.getBaseValue();
   }
 }

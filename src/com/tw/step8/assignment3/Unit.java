@@ -5,7 +5,8 @@ public enum Unit {
   IN(25),
   CM(10),
   MM(1),
-  GAL(3.78);
+  GAL(3.78),
+  LT(1);
 
 
   private final double baseValue;

@@ -19,6 +19,6 @@ public class Length {
   }
 
   public double toMM() {
-    return this.superMeasure.toMM() + this.subMeasure.toMM();
+    return this.superMeasure.evaluate() + this.subMeasure.evaluate();
   }
 }
