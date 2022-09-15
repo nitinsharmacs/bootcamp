@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Length {
   private final Measure superMeasure;
   private final Measure subMeasure;
+  private static final double INCH_IN_UNIT_MM = 0.0394;
 
   private Length(Measure superMeasure, Measure subMeasure) {
     this.superMeasure = superMeasure;
@@ -37,7 +38,7 @@ public class Length {
   }
 
   public double toInch() {
-    return this.toMM() * 0.0394;
+    return this.toMM() * INCH_IN_UNIT_MM;
   }
 
   @Override
