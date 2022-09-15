@@ -37,6 +37,8 @@ class ChanceTest {
     Chance chance2 = Chance.createChance(0.2);
 
     Chance expected = Chance.createChance(0.44);
-    assertTrue(expected.isWithin(chance1.or(chance2), 0.01));
+    Chance actual = chance1.or(chance2);
+
+    assertTrue(expected.isWithin(actual, 0.01));
   }
 }

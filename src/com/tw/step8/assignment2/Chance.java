@@ -5,26 +5,26 @@ import com.tw.step8.assignment2.exception.InvalidProbabilityException;
 import java.util.Objects;
 
 public class Chance {
-  private final double probability;
+  private final double value;
 
   private Chance(double probability) {
-    this.probability = probability;
+    this.value = probability;
   }
 
   public static Chance createChance(double probability) throws InvalidProbabilityException {
     if (probability < 0 || probability > 1) {
-      throw new InvalidProbabilityException();
+      throw new InvalidProbabilityException(probability);
     }
 
     return new Chance(probability);
   }
 
   public Chance not() {
-    return new Chance(1 - this.probability);
+    return new Chance(1 - this.value);
   }
 
   public Chance and(Chance chance) throws InvalidProbabilityException {
-    return Chance.createChance(this.probability * chance.probability);
+    return Chance.createChance(this.value * chance.value);
   }
 
   public Chance or(Chance anotherChance) throws InvalidProbabilityException {
@@ -35,7 +35,7 @@ public class Chance {
   }
 
   public boolean isWithin(Chance anotherChance, double delta) {
-    double valueDifference = Math.abs(this.probability - anotherChance.probability);
+    double valueDifference = Math.abs(this.value - anotherChance.value);
 
     return valueDifference <= delta;
   }
@@ -43,7 +43,7 @@ public class Chance {
   @Override
   public String toString() {
     return "Chance{" +
-      "probability=" + probability +
+      "probability=" + value +
       '}';
   }
 
@@ -52,12 +52,12 @@ public class Chance {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Chance chance = (Chance) o;
-    return Double.compare(chance.probability, probability) == 0;
+    return Double.compare(chance.value, value) == 0;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(probability);
+    return Objects.hash(value);
   }
 
 }
