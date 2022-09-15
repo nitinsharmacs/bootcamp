@@ -12,7 +12,7 @@ class ChanceTest {
   }
 
   @Test
-  void shouldGiveNotOfChance() throws InvalidProbabilityException {
+  void shouldComplementChance() throws InvalidProbabilityException {
     Chance chance = Chance.createChance(0.3);
 
     Chance expected = Chance.createChance(0.7);
@@ -22,12 +22,21 @@ class ChanceTest {
   }
 
   @Test
-  void shouldGiveChanceForBothProbabilities() throws InvalidProbabilityException {
+  void shouldANDChances() throws InvalidProbabilityException {
     Chance chance = Chance.createChance(0.3);
 
     Chance expected = Chance.createChance(0.12);
-    Chance actual = chance.both(Chance.createChance(0.4));
+    Chance actual = chance.and(Chance.createChance(0.4));
 
     assertEquals(expected, actual);
+  }
+
+  @Test
+  void shouldORChances() throws InvalidProbabilityException {
+    Chance chance1 = Chance.createChance(0.3);
+    Chance chance2 = Chance.createChance(0.2);
+
+    Chance expected = Chance.createChance(0.44);
+    assertTrue(expected.isWithin(chance1.or(chance2), 0.01));
   }
 }

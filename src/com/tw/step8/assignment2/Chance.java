@@ -23,8 +23,28 @@ public class Chance {
     return new Chance(1 - this.probability);
   }
 
-  public Chance both(Chance chance) throws InvalidProbabilityException {
+  public Chance and(Chance chance) throws InvalidProbabilityException {
     return Chance.createChance(this.probability * chance.probability);
+  }
+
+  public Chance or(Chance anotherChance) throws InvalidProbabilityException {
+    Chance not1 = this.not();
+    Chance not2 = anotherChance.not();
+
+    return not1.and(not2).not();
+  }
+
+  public boolean isWithin(Chance anotherChance, double delta) {
+    double valueDifference = Math.abs(this.probability - anotherChance.probability);
+
+    return valueDifference <= delta;
+  }
+
+  @Override
+  public String toString() {
+    return "Chance{" +
+      "probability=" + probability +
+      '}';
   }
 
   @Override
