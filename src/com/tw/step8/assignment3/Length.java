@@ -14,11 +14,11 @@ public class Length {
   }
 
   public int compare(Length otherLength) {
-    return Integer.compare(this.toMM(), otherLength.toMM());
+    return Double.compare(this.toMM(), otherLength.toMM());
 
   }
 
-  public int toMM() {
+  public double toMM() {
     return this.superMeasure.toMM() + this.subMeasure.toMM();
   }
 }

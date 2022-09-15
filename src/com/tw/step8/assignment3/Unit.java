@@ -4,16 +4,17 @@ public enum Unit {
   FT(300),
   IN(25),
   CM(10),
-  MM(1);
+  MM(1),
+  GAL(3.78);
 
 
-  private final int mmValue;
+  private final double baseValue;
 
-  Unit(int mmValue) {
-    this.mmValue = mmValue;
+  Unit(double baseValue) {
+    this.baseValue = baseValue;
   }
 
-  public int toMM() {
-    return this.mmValue;
+  public double getBaseValue() {
+    return this.baseValue;
   }
 }
