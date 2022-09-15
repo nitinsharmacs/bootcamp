@@ -25,6 +25,7 @@ public class Length {
   }
 
   public Length add(Length length2) {
+    System.out.println(this.toInch() + length2.toInch());
     Measure superMeasure = new Measure(this.toInch() + length2.toInch(), Unit.IN);
 
     return new Length(superMeasure, new Measure(0, Unit.IN));

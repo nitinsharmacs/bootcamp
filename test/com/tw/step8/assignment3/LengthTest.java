@@ -80,7 +80,7 @@ class LengthTest {
 
     Length expectedLength = Length.create(2, Unit.IN);
 
-    assertEquals(expectedLength, length1.add(length2));
+    assertEquals(expectedLength.toInch(), length1.add(length2).toInch(), 0.1);
   }
 
   @Test
