@@ -16,10 +16,6 @@ public class Measure {
     return this.value * this.unit.getBaseValue();
   }
 
-  public Measure add(Measure measure) {
-    return new Measure(this.value + measure.value, this.unit);
-  }
-
   @Override
   public String toString() {
     return "Measure{" +

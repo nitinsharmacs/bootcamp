@@ -11,11 +11,11 @@ public class Length {
     this.subMeasure = subMeasure;
   }
 
-  public static Length create(int value1, Unit unit1, int value2, Unit unit2) {
+  public static Length create(double value1, Unit unit1, double value2, Unit unit2) {
     return new Length(new Measure(value1, unit1), new Measure(value2, unit2));
   }
 
-  public static Length create(int value, Unit unit) {
+  public static Length create(double value, Unit unit) {
     return Length.create(value, unit, 0, unit);
   }
 
@@ -25,11 +25,17 @@ public class Length {
   }
 
   public Length add(Length length2) {
-    return new Length(this.superMeasure.add(length2.superMeasure), new Measure(0, Unit.IN));
+    Measure superMeasure = new Measure(this.toInch() + length2.toInch(), Unit.IN);
+
+    return new Length(superMeasure, new Measure(0, Unit.IN));
   }
 
   public double toMM() {
     return this.superMeasure.evaluate() + this.subMeasure.evaluate();
+  }
+
+  public double toInch() {
+    return this.toMM() * 0.0394;
   }
 
   @Override

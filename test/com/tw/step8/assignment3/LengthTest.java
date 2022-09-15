@@ -82,4 +82,14 @@ class LengthTest {
 
     assertEquals(expectedLength, length1.add(length2));
   }
+
+  @Test
+  void shouldAddTwoLengthsOfDifferentUnits() {
+    Length length1 = Length.create(2, Unit.IN);
+    Length length2 = Length.create(2.5, Unit.CM);
+
+    Length expectedLength = Length.create(3, Unit.IN);
+
+    assertEquals(expectedLength.toInch(), length1.add(length2).toInch(), 0.1);
+  }
 }

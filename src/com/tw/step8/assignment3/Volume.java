@@ -1,5 +1,7 @@
 package com.tw.step8.assignment3;
 
+import java.util.Objects;
+
 public class Volume {
   private final Measure superMeasure;
   private final Measure subMeasure;
@@ -13,11 +15,34 @@ public class Volume {
     return new Volume(new Measure(value1, unit1), new Measure(value2, unit2));
   }
 
+  public static Volume create(double value, Unit unit) {
+    return new Volume(new Measure(value, unit), new Measure(0, Unit.GAL));
+  }
+
   public int compare(Volume anotherVolume) {
     return Double.compare(this.toLiter(), anotherVolume.toLiter());
   }
 
-  private double toLiter() {
+  public double toLiter() {
     return this.superMeasure.evaluate() + this.subMeasure.evaluate();
+  }
+
+  public Volume add(Volume volume2) {
+    Measure superMeasure = new Measure(this.toLiter() + volume2.toLiter(), Unit.LT);
+
+    return new Volume(superMeasure, new Measure(0, Unit.LT));
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Volume volume = (Volume) o;
+    return Objects.equals(superMeasure, volume.superMeasure) && Objects.equals(subMeasure, volume.subMeasure);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(superMeasure, subMeasure);
   }
 }

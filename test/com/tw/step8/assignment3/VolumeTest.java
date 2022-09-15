@@ -21,4 +21,14 @@ class VolumeTest {
 
     assertEquals(volume1.compare(volume2), 0);
   }
+
+  @Test
+  void shouldAddTwoVolumesOfDifferentUnits() {
+    Volume volume1 = Volume.create(1, Unit.GAL);
+    Volume volume2 = Volume.create(1, Unit.LT);
+
+    Volume expectedVolume = Volume.create(4.78, Unit.LT);
+
+    assertEquals(expectedVolume.toLiter(), volume1.add(volume2).toLiter(), 0.1);
+  }
 }
