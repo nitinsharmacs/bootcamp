@@ -1,35 +1,24 @@
 package com.tw.step8.assignment3;
 
-import com.tw.step8.assignment3.Unit.Feet;
-import com.tw.step8.assignment3.Unit.Inch;
-import com.tw.step8.assignment3.Unit.Unit;
-
 public class Length {
-  private final Unit superUnit;
-  private final Unit subUnit;
+  private final Measure superMeasure;
+  private final Measure subMeasure;
 
-  private Length(Unit superUnitValue, Unit subUnitValue) {
-    this.superUnit = superUnitValue;
-    this.subUnit = subUnitValue;
+  private Length(Measure superMeasure, Measure subMeasure) {
+    this.superMeasure = superMeasure;
+    this.subMeasure = subMeasure;
   }
 
-  public static Length create(int superUnitValue, int subUnitValue) {
-    return new Length(new Feet(superUnitValue), new Inch(subUnitValue));
+  public static Length create(int value1, Unit unit1, int value2, Unit unit2) {
+    return new Length(new Measure(value1, unit1), new Measure(value2, unit2));
   }
 
   public int compare(Length otherLength) {
-    if (this.toMM() > otherLength.toMM()) {
-      return 1;
-    }
+    return Integer.compare(this.toMM(), otherLength.toMM());
 
-    if (this.toMM() == otherLength.toMM()) {
-      return 0;
-    }
-
-    return -1;
   }
 
   public int toMM() {
-    return this.superUnit.toMM() + this.subUnit.toMM();
+    return this.superMeasure.toMM() + this.subMeasure.toMM();
   }
 }
