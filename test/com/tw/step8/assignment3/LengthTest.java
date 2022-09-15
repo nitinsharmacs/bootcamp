@@ -11,8 +11,8 @@ class LengthTest {
     Length length1 = Length.create(2, LengthUnit.FT, 1, LengthUnit.IN);
     Length length2 = Length.create(2, LengthUnit.FT, 0, LengthUnit.IN);
 
-    assertEquals(length1.compare(length2), 1);
-    assertEquals(length2.compare(length1), -1);
+    assertEquals(1, length1.compare(length2));
+    assertEquals(-1, length2.compare(length1));
   }
 
   @Test
@@ -20,7 +20,7 @@ class LengthTest {
     Length length1 = Length.create(1, LengthUnit.FT, 0, LengthUnit.IN);
     Length length2 = Length.create(1, LengthUnit.FT, 0, LengthUnit.IN);
 
-    assertEquals(length1.compare(length2), 0);
+    assertEquals(0, length1.compare(length2));
   }
 
   @Test
@@ -28,8 +28,8 @@ class LengthTest {
     Length length1 = Length.create(2, LengthUnit.IN, 1, LengthUnit.CM);
     Length length2 = Length.create(1, LengthUnit.IN, 0, LengthUnit.CM);
 
-    assertEquals(length1.compare(length2), 1);
-    assertEquals(length2.compare(length1), -1);
+    assertEquals(1, length1.compare(length2));
+    assertEquals(-1, length2.compare(length1));
   }
 
   @Test
@@ -37,7 +37,7 @@ class LengthTest {
     Length length1 = Length.create(1, LengthUnit.IN, 0, LengthUnit.CM);
     Length length2 = Length.create(1, LengthUnit.IN, 0, LengthUnit.CM);
 
-    assertEquals(length1.compare(length2), 0);
+    assertEquals(0, length1.compare(length2));
   }
 
   @Test
@@ -45,8 +45,8 @@ class LengthTest {
     Length length1 = Length.create(2, LengthUnit.CM, 1, LengthUnit.MM);
     Length length2 = Length.create(1, LengthUnit.CM, 0, LengthUnit.MM);
 
-    assertEquals(length1.compare(length2), 1);
-    assertEquals(length2.compare(length1), -1);
+    assertEquals(1, length1.compare(length2));
+    assertEquals(-1, length2.compare(length1));
   }
 
   @Test
@@ -54,7 +54,7 @@ class LengthTest {
     Length length1 = Length.create(1, LengthUnit.CM, 0, LengthUnit.MM);
     Length length2 = Length.create(1, LengthUnit.CM, 0, LengthUnit.MM);
 
-    assertEquals(length1.compare(length2), 0);
+    assertEquals(0, length1.compare(length2));
   }
 
   @Test
@@ -62,8 +62,8 @@ class LengthTest {
     Length length1 = Length.create(2, LengthUnit.MM, 1, LengthUnit.IN);
     Length length2 = Length.create(1, LengthUnit.MM, 0, LengthUnit.IN);
 
-    assertEquals(length1.compare(length2), 1);
-    assertEquals(length2.compare(length1), -1);
+    assertEquals(1, length1.compare(length2));
+    assertEquals(-1, length2.compare(length1));
   }
 
   @Test
@@ -71,7 +71,7 @@ class LengthTest {
     Length length1 = Length.create(1, LengthUnit.MM, 0, LengthUnit.IN);
     Length length2 = Length.create(1, LengthUnit.MM, 0, LengthUnit.IN);
 
-    assertEquals(length1.compare(length2), 0);
+    assertEquals(0, length1.compare(length2));
   }
 
   @Test
