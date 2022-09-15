@@ -72,4 +72,14 @@ class LengthTest {
 
     assertEquals(length1.compare(length2), 0);
   }
+
+  @Test
+  void shouldAddTwoLengthsWithSameUnit() {
+    Length length1 = Length.create(1, Unit.IN);
+    Length length2 = Length.create(1, Unit.IN);
+
+    Length expectedLength = Length.create(2, Unit.IN);
+
+    assertEquals(expectedLength, length1.add(length2));
+  }
 }

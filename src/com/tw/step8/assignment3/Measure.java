@@ -1,5 +1,7 @@
 package com.tw.step8.assignment3;
 
+import java.util.Objects;
+
 public class Measure {
 
   private final double value;
@@ -12,5 +14,30 @@ public class Measure {
 
   public double evaluate() {
     return this.value * this.unit.getBaseValue();
+  }
+
+  public Measure add(Measure measure) {
+    return new Measure(this.value + measure.value, this.unit);
+  }
+
+  @Override
+  public String toString() {
+    return "Measure{" +
+      "value=" + value +
+      ", unit=" + unit +
+      '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Measure measure = (Measure) o;
+    return Double.compare(measure.value, value) == 0 && unit == measure.unit;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(value, unit);
   }
 }
