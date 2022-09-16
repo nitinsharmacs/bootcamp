@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingLotTest {
   @Test
-  void shouldParkACarAtAvailableSpot() {
+  void shouldParkAVehicleAtAvailableSpot() {
     ParkingLot parkingLot = ParkingLot.create(4);
     int position = parkingLot.add(new Vehicle());
 
@@ -38,4 +38,24 @@ class ParkingLotTest {
 
     assertFalse(parkingLot.isFull());
   }
+
+  @Test
+  void shouldAddParkingAttendant() {
+    ParkingLot parkingLot = ParkingLot.create(1);
+    ParkingAttendant attendant = new ParkingAttendant();
+    parkingLot.assignAttendant(attendant);
+
+    assertTrue(parkingLot.hasAttendant(attendant));
+  }
+
+  @Test
+  void shouldAssignParkingAttendant() {
+    ParkingAttendant attendant = new ParkingAttendant();
+    ParkingLot parkingLot = ParkingLot.create(4);
+
+    int totalAttendants = parkingLot.assignAttendant(attendant);
+
+    assertEquals(1, totalAttendants);
+  }
 }
+
