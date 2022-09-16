@@ -5,21 +5,15 @@ import com.tw.step8.assignment3.Unit.LengthUnit;
 import java.util.Objects;
 
 public class Length {
-  private final Measure superMeasure;
-  private final Measure subMeasure;
+  private final Measure measure;
   private static final double INCH_IN_UNIT_MM = 0.0394;
 
-  private Length(Measure superMeasure, Measure subMeasure) {
-    this.superMeasure = superMeasure;
-    this.subMeasure = subMeasure;
-  }
-
-  public static Length create(double value1, LengthUnit unit1, double value2, LengthUnit unit2) {
-    return new Length(new Measure(value1, unit1), new Measure(value2, unit2));
+  private Length(Measure measure) {
+    this.measure = measure;
   }
 
   public static Length create(double value, LengthUnit unit) {
-    return Length.create(value, unit, 0, unit);
+    return new Length(new Measure(value, unit));
   }
 
   public int compare(Length otherLength) {
@@ -28,13 +22,13 @@ public class Length {
   }
 
   public Length add(Length length2) {
-    Measure superMeasure = new Measure(this.toInch() + length2.toInch(), LengthUnit.IN);
+    Measure measure = new Measure(this.toInch() + length2.toInch(), LengthUnit.IN);
 
-    return new Length(superMeasure, new Measure(0, LengthUnit.IN));
+    return new Length(measure);
   }
 
   public double toMM() {
-    return this.superMeasure.evaluate() + this.subMeasure.evaluate();
+    return this.measure.evaluate();
   }
 
   public double toInch() {
@@ -44,8 +38,7 @@ public class Length {
   @Override
   public String toString() {
     return "Length{" +
-      "superMeasure=" + superMeasure +
-      ", subMeasure=" + subMeasure +
+      "superMeasure=" + measure +
       '}';
   }
 
@@ -54,11 +47,11 @@ public class Length {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Length length = (Length) o;
-    return Objects.equals(superMeasure, length.superMeasure) && Objects.equals(subMeasure, length.subMeasure);
+    return Objects.equals(measure, length.measure);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(superMeasure, subMeasure);
+    return Objects.hash(measure);
   }
 }

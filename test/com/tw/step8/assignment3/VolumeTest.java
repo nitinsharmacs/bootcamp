@@ -7,20 +7,37 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class VolumeTest {
   @Test
-  void shouldCompareTwoVolumes() {
-    Volume volume1 = Volume.create(1, VolumeUnit.LT, 1, VolumeUnit.GAL);
-    Volume volume2 = Volume.create(1, VolumeUnit.LT, 2, VolumeUnit.GAL);
+  void shouldCompareTwoVolumesInSameUnit() {
+    Volume volume1 = Volume.create(1, VolumeUnit.LT);
+    Volume volume2 = Volume.create(2, VolumeUnit.LT);
 
-    assertEquals(volume1.compare(volume2), -1);
-    assertEquals(volume2.compare(volume1), 1);
+    assertEquals(-1, volume1.compare(volume2));
+    assertEquals(1, volume2.compare(volume1));
   }
 
   @Test
-  void shouldCompareTwoEqualVolumes() {
-    Volume volume1 = Volume.create(1, VolumeUnit.LT, 2, VolumeUnit.GAL);
-    Volume volume2 = Volume.create(1, VolumeUnit.LT, 2, VolumeUnit.GAL);
+  void shouldCompareTwoVolumesInDifferentUnits() {
+    Volume volume1 = Volume.create(2, VolumeUnit.GAL);
+    Volume volume2 = Volume.create(3.78, VolumeUnit.LT);
 
-    assertEquals(volume1.compare(volume2), 0);
+    assertEquals(1, volume1.compare(volume2));
+    assertEquals(-1, volume2.compare(volume1));
+  }
+
+  @Test
+  void shouldCompareTwoEqualVolumesInSameUnit() {
+    Volume volume1 = Volume.create(1, VolumeUnit.LT);
+    Volume volume2 = Volume.create(1, VolumeUnit.LT);
+
+    assertEquals(0, volume1.compare(volume2));
+  }
+
+  @Test
+  void shouldCompareTwoEqualVolumesInDifferentUnits() {
+    Volume volume1 = Volume.create(1, VolumeUnit.GAL);
+    Volume volume2 = Volume.create(3.78, VolumeUnit.LT);
+
+    assertEquals(0, volume1.compare(volume2));
   }
 
   @Test

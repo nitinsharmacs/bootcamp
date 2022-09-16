@@ -7,26 +7,43 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LengthTest {
   @Test
-  void shouldCompareTwoLengthsInFeetAndInch() {
-    Length length1 = Length.create(2, LengthUnit.FT, 1, LengthUnit.IN);
-    Length length2 = Length.create(2, LengthUnit.FT, 0, LengthUnit.IN);
+  void shouldCompareTwoLengthsInSameUnits() {
+    Length length1 = Length.create(2, LengthUnit.IN);
+    Length length2 = Length.create(1, LengthUnit.IN);
 
     assertEquals(1, length1.compare(length2));
     assertEquals(-1, length2.compare(length1));
   }
 
   @Test
-  void shouldCompareTwoEqualLengthsFeetAndInch() {
-    Length length1 = Length.create(1, LengthUnit.FT, 0, LengthUnit.IN);
-    Length length2 = Length.create(1, LengthUnit.FT, 0, LengthUnit.IN);
+  void shouldCompareTwoLengthsInDifferentUnits() {
+    Length length1 = Length.create(2, LengthUnit.FT);
+    Length length2 = Length.create(1, LengthUnit.IN);
+
+    assertEquals(1, length1.compare(length2));
+    assertEquals(-1, length2.compare(length1));
+  }
+
+  @Test
+  void shouldCompareTwoEqualLengthsInSameUnit() {
+    Length length1 = Length.create(1, LengthUnit.FT);
+    Length length2 = Length.create(1, LengthUnit.FT);
+
+    assertEquals(0, length1.compare(length2));
+  }
+
+  @Test
+  void shouldCompareTwoEqualLengthsInDifferentUnit() {
+    Length length1 = Length.create(1, LengthUnit.FT);
+    Length length2 = Length.create(12, LengthUnit.IN);
 
     assertEquals(0, length1.compare(length2));
   }
 
   @Test
   void shouldCompareTwoLengthsInInchAndCentimeter() {
-    Length length1 = Length.create(2, LengthUnit.IN, 1, LengthUnit.CM);
-    Length length2 = Length.create(1, LengthUnit.IN, 0, LengthUnit.CM);
+    Length length1 = Length.create(2, LengthUnit.IN);
+    Length length2 = Length.create(1, LengthUnit.CM);
 
     assertEquals(1, length1.compare(length2));
     assertEquals(-1, length2.compare(length1));
@@ -34,16 +51,16 @@ class LengthTest {
 
   @Test
   void shouldCompareTwoEqualLengthsInInchAndCentimeter() {
-    Length length1 = Length.create(1, LengthUnit.IN, 0, LengthUnit.CM);
-    Length length2 = Length.create(1, LengthUnit.IN, 0, LengthUnit.CM);
+    Length length1 = Length.create(2, LengthUnit.IN);
+    Length length2 = Length.create(5, LengthUnit.CM);
 
     assertEquals(0, length1.compare(length2));
   }
 
   @Test
   void shouldCompareTwoLengthsInCentimeterAndMillimeter() {
-    Length length1 = Length.create(2, LengthUnit.CM, 1, LengthUnit.MM);
-    Length length2 = Length.create(1, LengthUnit.CM, 0, LengthUnit.MM);
+    Length length1 = Length.create(2, LengthUnit.CM);
+    Length length2 = Length.create(1, LengthUnit.MM);
 
     assertEquals(1, length1.compare(length2));
     assertEquals(-1, length2.compare(length1));
@@ -51,25 +68,25 @@ class LengthTest {
 
   @Test
   void shouldCompareTwoEqualLengthsCentimeterAndMillimeter() {
-    Length length1 = Length.create(1, LengthUnit.CM, 0, LengthUnit.MM);
-    Length length2 = Length.create(1, LengthUnit.CM, 0, LengthUnit.MM);
+    Length length1 = Length.create(1, LengthUnit.CM);
+    Length length2 = Length.create(10, LengthUnit.MM);
 
     assertEquals(0, length1.compare(length2));
   }
 
   @Test
   void shouldCompareTwoLengthsInMillimeterAndInch() {
-    Length length1 = Length.create(2, LengthUnit.MM, 1, LengthUnit.IN);
-    Length length2 = Length.create(1, LengthUnit.MM, 0, LengthUnit.IN);
+    Length length1 = Length.create(2, LengthUnit.MM);
+    Length length2 = Length.create(1, LengthUnit.IN);
 
-    assertEquals(1, length1.compare(length2));
-    assertEquals(-1, length2.compare(length1));
+    assertEquals(-1, length1.compare(length2));
+    assertEquals(1, length2.compare(length1));
   }
 
   @Test
   void shouldCompareTwoEqualLengthsMillimeterAndInch() {
-    Length length1 = Length.create(1, LengthUnit.MM, 0, LengthUnit.IN);
-    Length length2 = Length.create(1, LengthUnit.MM, 0, LengthUnit.IN);
+    Length length1 = Length.create(100, LengthUnit.MM);
+    Length length2 = Length.create(4, LengthUnit.IN);
 
     assertEquals(0, length1.compare(length2));
   }
