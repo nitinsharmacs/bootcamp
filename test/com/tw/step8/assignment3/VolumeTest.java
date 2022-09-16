@@ -11,8 +11,8 @@ class VolumeTest {
     Volume volume1 = Volume.create(1, VolumeUnit.LT);
     Volume volume2 = Volume.create(2, VolumeUnit.LT);
 
-    assertEquals(-1, volume1.compare(volume2));
-    assertEquals(1, volume2.compare(volume1));
+    assertEquals(Rank.SMALLER, volume1.compare(volume2));
+    assertEquals(Rank.GREATER, volume2.compare(volume1));
   }
 
   @Test
@@ -20,8 +20,8 @@ class VolumeTest {
     Volume volume1 = Volume.create(2, VolumeUnit.GAL);
     Volume volume2 = Volume.create(3.78, VolumeUnit.LT);
 
-    assertEquals(1, volume1.compare(volume2));
-    assertEquals(-1, volume2.compare(volume1));
+    assertEquals(Rank.GREATER, volume1.compare(volume2));
+    assertEquals(Rank.SMALLER, volume2.compare(volume1));
   }
 
   @Test
@@ -29,7 +29,7 @@ class VolumeTest {
     Volume volume1 = Volume.create(1, VolumeUnit.LT);
     Volume volume2 = Volume.create(1, VolumeUnit.LT);
 
-    assertEquals(0, volume1.compare(volume2));
+    assertEquals(Rank.EQUAL, volume1.compare(volume2));
   }
 
   @Test
@@ -37,7 +37,7 @@ class VolumeTest {
     Volume volume1 = Volume.create(1, VolumeUnit.GAL);
     Volume volume2 = Volume.create(3.78, VolumeUnit.LT);
 
-    assertEquals(0, volume1.compare(volume2));
+    assertEquals(Rank.EQUAL, volume1.compare(volume2));
   }
 
   @Test

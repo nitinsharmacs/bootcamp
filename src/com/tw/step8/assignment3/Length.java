@@ -16,9 +16,19 @@ public class Length {
     return new Length(new Measure(value, unit));
   }
 
-  public int compare(Length otherLength) {
-    return Double.compare(this.toMM(), otherLength.toMM());
+  public Rank compare(Length otherLength) {
+    double length1 = this.toMM();
+    double length2 = otherLength.toMM();
 
+    if (length1 == length2) {
+      return Rank.EQUAL;
+    }
+
+    if (length1 > length2) {
+      return Rank.GREATER;
+    }
+
+    return Rank.SMALLER;
   }
 
   public Length add(Length length2) {

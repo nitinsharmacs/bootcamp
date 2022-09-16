@@ -13,8 +13,19 @@ public class Volume {
     return new Volume(new Measure(value, unit));
   }
 
-  public int compare(Volume anotherVolume) {
-    return Double.compare(this.toLiter(), anotherVolume.toLiter());
+  public Rank compare(Volume anotherVolume) {
+    double volume1 = this.toLiter();
+    double volume2 = anotherVolume.toLiter();
+
+    if (volume1 == volume2) {
+      return Rank.EQUAL;
+    }
+
+    if (volume1 > volume2) {
+      return Rank.GREATER;
+    }
+
+    return Rank.SMALLER;
   }
 
   public double toLiter() {
