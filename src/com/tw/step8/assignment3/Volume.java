@@ -33,8 +33,8 @@ public class Volume {
   }
 
   public Volume add(Volume volume2) {
-    Measure measure = new Measure(this.toLiter() + volume2.toLiter(), VolumeUnit.LT);
+    double newVolume = this.toLiter() + volume2.toLiter();
 
-    return new Volume(measure);
+    return Volume.create(newVolume, VolumeUnit.LT);
   }
 }

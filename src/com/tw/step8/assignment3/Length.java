@@ -32,9 +32,8 @@ public class Length {
   }
 
   public Length add(Length length2) {
-    Measure measure = new Measure(this.toInch() + length2.toInch(), LengthUnit.IN);
-
-    return new Length(measure);
+    double newLength = this.toInch() + length2.toInch();
+    return Length.create(newLength, LengthUnit.IN);
   }
 
   public double toMM() {
