@@ -1,42 +1,29 @@
 package com.tw.step8.assignment4;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.tw.step8.assignment4.notifier.EventData;
+import com.tw.step8.assignment4.notifier.Notifier;
 
 // TODO : remove this parkingArea list and create entity
 public class ParkingLot implements Parkable {
   private final Vehicle[] parkingArea;
   private int position;
-  private final List<ParkingAttendant> attendants;
   private final Notifier notifier;
 
-  private ParkingLot(Vehicle[] parkingArea, ArrayList<ParkingAttendant> attendants, Notifier notifier) {
+  private ParkingLot(Vehicle[] parkingArea, Notifier notifier) {
     this.parkingArea = parkingArea;
-    this.attendants = attendants;
     this.notifier = notifier;
     this.position = 0;
   }
 
-  public static ParkingLot create(int parkingLotSize) {
-    return new ParkingLot(new Vehicle[parkingLotSize], new ArrayList<>(), new Notifier());
-  }
-
-  public int assignAttendant(ParkingAttendant attendant) {
-    this.attendants.add(attendant);
-    attendant.assign(this);
-
-    this.notifier.on("full", attendant);
-
-    return this.attendants.size();
+  public static ParkingLot create(int parkingLotSize, Notifier notifier) {
+    return new ParkingLot(new Vehicle[parkingLotSize], notifier);
   }
 
   public int add(Vehicle vehicle) {
     this.parkingArea[this.position] = vehicle;
     this.position += 1;
 
-    if (this.isFull()) {
-      this.notifier.emit("full");
-    }
+    this.notifier.emit("add", new EventData(this.occupancy()));
 
     return this.position;
   }
@@ -45,7 +32,16 @@ public class ParkingLot implements Parkable {
     return this.position >= this.parkingArea.length;
   }
 
-  public boolean hasAttendant(ParkingAttendant attendant) {
-    return this.attendants.contains(attendant);
+  public double occupancy() {
+    return this.position / (double) this.parkingArea.length;
+  }
+
+  public int remove() {
+    this.position -= 1;
+    this.parkingArea[this.position] = null;
+
+    this.notifier.emit("remove", new EventData(this.occupancy()));
+
+    return this.position;
   }
 }

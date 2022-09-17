@@ -1,5 +1,6 @@
 package com.tw.step8.assignment4;
 
+import com.tw.step8.assignment4.notifier.Notifier;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,7 +9,7 @@ class ParkingAttendantTest {
   @Test
   void shouldAssignParkingLotToAttendant() {
     ParkingAttendant attendant = new ParkingAttendant();
-    int parkingLotsInHand = attendant.assign(ParkingLot.create(1));
+    int parkingLotsInHand = attendant.assign(ParkingLot.create(1, new Notifier()));
 
     assertEquals(1, parkingLotsInHand);
   }
@@ -16,8 +17,8 @@ class ParkingAttendantTest {
   @Test
   void shouldAssignParkingLotsToAttendant() {
     ParkingAttendant attendant = new ParkingAttendant();
-    attendant.assign(ParkingLot.create(1));
-    int parkingLotsInHand = attendant.assign(ParkingLot.create(1));
+    attendant.assign(ParkingLot.create(1, new Notifier()));
+    int parkingLotsInHand = attendant.assign(ParkingLot.create(1, new Notifier()));
 
     assertEquals(2, parkingLotsInHand);
   }
@@ -25,7 +26,7 @@ class ParkingAttendantTest {
   @Test
   void shouldParkVehicle() {
     ParkingAttendant attendant = new ParkingAttendant();
-    attendant.assign(ParkingLot.create(1));
+    attendant.assign(ParkingLot.create(1, new Notifier()));
 
     assertTrue(attendant.park(new Vehicle()));
   }
@@ -33,8 +34,8 @@ class ParkingAttendantTest {
   @Test
   void shouldParkVehicleInNextAvailableParkingLot() {
     ParkingAttendant attendant = new ParkingAttendant();
-    attendant.assign(ParkingLot.create(1));
-    attendant.assign(ParkingLot.create(1));
+    attendant.assign(ParkingLot.create(1, new Notifier()));
+    attendant.assign(ParkingLot.create(1, new Notifier()));
 
     assertTrue(attendant.park(new Vehicle()));
     assertTrue(attendant.park(new Vehicle()));

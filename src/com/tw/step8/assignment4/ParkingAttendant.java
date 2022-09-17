@@ -1,5 +1,7 @@
 package com.tw.step8.assignment4;
 
+import com.tw.step8.assignment4.notifier.EventData;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -50,11 +52,7 @@ public class ParkingAttendant implements Observer {
   }
 
   @Override
-  public void inform() {
+  public void inform(EventData data) {
     // do something
-  }
-
-  public void promote() {
-    // promote
   }
 }

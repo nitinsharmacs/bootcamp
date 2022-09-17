@@ -1,4 +1,6 @@
-package com.tw.step8.assignment4;
+package com.tw.step8.assignment4.notifier;
+
+import com.tw.step8.assignment4.Observer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,13 +28,13 @@ public class Notifier {
     observers.add(observer);
   }
 
-  public boolean emit(String eventName) {
+  public boolean emit(String eventName, EventData eventData) {
     List<Observer> observers = this.mapper.get(eventName);
     if (observers == null) {
       return false;
     }
 
-    observers.forEach(observer -> observer.inform());
+    observers.forEach(observer -> observer.inform(eventData));
 
     return true;
   }
