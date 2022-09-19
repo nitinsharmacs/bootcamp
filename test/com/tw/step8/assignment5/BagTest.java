@@ -10,7 +10,7 @@ class BagTest {
   void shouldAddABallToBag() {
     Bag bag = new Bag();
 
-    assertTrue(bag.add(new Ball()));
+    assertTrue(bag.add(Ball.NORMAL));
   }
 
   @Test
@@ -18,9 +18,28 @@ class BagTest {
     Bag bag = new Bag();
 
     for (int i = 0; i < 12; i++) {
-      bag.add(new Ball());
+      bag.add(Ball.NORMAL);
     }
 
-    assertFalse(bag.add(new Ball()));
+    assertFalse(bag.add(Ball.NORMAL));
+  }
+
+  @Test
+  void shouldAddGreenBall() {
+    Bag bag = new Bag();
+
+
+    assertTrue(bag.add(Ball.GREEN));
+  }
+
+  @Test
+  void shouldNotAddMoreThanThreeGreenBalls() {
+    Bag bag = new Bag();
+
+    bag.add(Ball.GREEN);
+    bag.add(Ball.GREEN);
+    bag.add(Ball.GREEN);
+
+    assertFalse(bag.add(Ball.GREEN));
   }
 }
