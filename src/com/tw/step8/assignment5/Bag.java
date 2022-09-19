@@ -1,10 +1,11 @@
 package com.tw.step8.assignment5;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Bag {
   private final int capacity;
-  private final ArrayList<Ball> balls;
+  private final List<Ball> balls;
 
   public Bag() {
     this.capacity = 12;

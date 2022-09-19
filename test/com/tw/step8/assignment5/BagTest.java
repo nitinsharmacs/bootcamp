@@ -12,4 +12,15 @@ class BagTest {
 
     assertTrue(bag.add(new Ball()));
   }
+
+  @Test
+  void shouldNotAddBallToBagIfBagIsFull() {
+    Bag bag = new Bag();
+
+    for (int i = 0; i < 12; i++) {
+      bag.add(new Ball());
+    }
+
+    assertFalse(bag.add(new Ball()));
+  }
 }
