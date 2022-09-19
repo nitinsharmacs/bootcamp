@@ -1,12 +1,12 @@
 package com.tw.step8.assignment5;
 
 public class BallRecord {
-  private final Ball name;
+  private final Ball color;
   private int limit;
   private int count;
 
-  public BallRecord(Ball name, int limit, int count) {
-    this.name = name;
+  public BallRecord(Ball color, int limit, int count) {
+    this.color = color;
     this.limit = limit;
     this.count = count;
   }
@@ -23,11 +23,7 @@ public class BallRecord {
     this.limit += delta;
   }
 
-  public int getCount() {
-    return this.count;
-  }
-
-  public int getLimit() {
-    return this.limit;
+  public double futureOccupancy(int totalBalls) {
+    return (this.count + this.limit + 1.0) / (totalBalls + 1);
   }
 }

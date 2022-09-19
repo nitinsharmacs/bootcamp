@@ -88,4 +88,14 @@ class BagTest {
 
     assertTrue(bag.add(Ball.YELLOW));
   }
+
+  @Test
+  void shouldNotAddBlueIfBlackBallAdded() {
+    Bag bag = Bag.createBag();
+
+    bag.add(Ball.BLACK);
+
+    assertFalse(bag.add(Ball.BLUE));
+    assertTrue(bag.add(Ball.BLACK));
+  }
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 public class BallRegistry {
   private final HashMap<Ball, BallRecord> registry;
   private int ballsRegistered;
+  private static final double YELLOW_BALLS_MAX_OCCUPANCY = 0.4;
 
   private BallRegistry(HashMap<Ball, BallRecord> registry) {
     this.ballsRegistered = 0;
@@ -14,11 +15,12 @@ public class BallRegistry {
   public static BallRegistry createBallRegistry() {
     HashMap<Ball, BallRecord> registry = new HashMap<>();
 
-//    registry.put(Ball.GREEN, 3);
     registry.put(Ball.GREEN, new BallRecord(Ball.GREEN, 3, 0));
     registry.put(Ball.NORMAL, new BallRecord(Ball.NORMAL, 12, 0));
     registry.put(Ball.RED, new BallRecord(Ball.RED, 0, 0));
     registry.put(Ball.YELLOW, new BallRecord(Ball.YELLOW, 0, 0));
+    registry.put(Ball.BLACK, new BallRecord(Ball.BLACK, 1, 0));
+    registry.put(Ball.BLUE, new BallRecord(Ball.BLUE, 1, 0));
 
     return new BallRegistry(registry);
   }
@@ -34,6 +36,12 @@ public class BallRegistry {
       this.increaseRedBallCapacity();
     }
 
+    if (ball == Ball.BLACK || ball == Ball.BLUE) {
+      this.registry.get(Ball.BLUE).increaseLimitBy(-1);
+      this.registry.get(Ball.BLACK).increaseLimitBy(-1);
+      record.increaseLimitBy(12);
+    }
+
     record.add();
     this.ballsRegistered += 1;
 
@@ -44,10 +52,8 @@ public class BallRegistry {
 
   private void updateYellowBallRecord() {
     BallRecord yellowRecord = this.registry.get(Ball.YELLOW);
-    int count = yellowRecord.getCount();
-    int limit = yellowRecord.getLimit();
 
-    if (((count + limit + 1.0) / (this.ballsRegistered + 1)) <= 0.4) {
+    if (yellowRecord.futureOccupancy(this.ballsRegistered) <= YELLOW_BALLS_MAX_OCCUPANCY) {
       yellowRecord.increaseLimitBy(1);
     }
   }
@@ -57,7 +63,5 @@ public class BallRegistry {
     BallRecord record = this.registry.get(Ball.RED);
 
     record.increaseLimitBy(2);
-//    this.registry.put(Ball.RED, ballCount);
-
   }
 }
