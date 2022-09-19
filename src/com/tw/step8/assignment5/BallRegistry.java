@@ -3,27 +3,29 @@ package com.tw.step8.assignment5;
 import java.util.HashMap;
 
 public class BallRegistry {
-  private final HashMap<Ball, Integer> registry;
+  private final HashMap<Ball, BallRecord> registry;
+  private int ballsRegistered;
 
-  private BallRegistry(HashMap<Ball, Integer> registry) {
-
+  private BallRegistry(HashMap<Ball, BallRecord> registry) {
+    this.ballsRegistered = 0;
     this.registry = registry;
   }
 
   public static BallRegistry createBallRegistry() {
-    HashMap<Ball, Integer> registry = new HashMap<>();
+    HashMap<Ball, BallRecord> registry = new HashMap<>();
 
-    registry.put(Ball.GREEN, 3);
-    registry.put(Ball.NORMAL, 12);
-    registry.put(Ball.RED, 0);
+//    registry.put(Ball.GREEN, 3);
+    registry.put(Ball.GREEN, new BallRecord(Ball.GREEN, 3, 0));
+    registry.put(Ball.NORMAL, new BallRecord(Ball.GREEN, 12, 0));
+    registry.put(Ball.RED, new BallRecord(Ball.GREEN, 0, 0));
 
     return new BallRegistry(registry);
   }
 
   public boolean register(Ball ball) {
-    Integer ballCount = this.registry.get(ball);
+    BallRecord record = this.registry.get(ball);
 
-    if (ballCount == 0) {
+    if (!record.canAddMore()) {
       return false;
     }
 
@@ -31,14 +33,23 @@ public class BallRegistry {
       this.increaseRedBallCapacity();
     }
 
-    this.registry.put(ball, --ballCount);
+    record.add();
+    this.ballsRegistered += 1;
+
+//    this.updateYellowBallCount(ball);
+
     return true;
   }
 
-  private void increaseRedBallCapacity() {
-    Integer ballCount = this.registry.get(Ball.RED) + 2;
+  private void updateYellowBallCount(Ball ball) {
 
-    this.registry.put(Ball.RED, ballCount);
+  }
+
+  private void increaseRedBallCapacity() {
+    BallRecord record = this.registry.get(Ball.RED);
+
+    record.increaseLimitBy(2);
+//    this.registry.put(Ball.RED, ballCount);
 
   }
 }
