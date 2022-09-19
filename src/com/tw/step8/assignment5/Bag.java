@@ -7,21 +7,17 @@ import java.util.List;
 public class Bag {
   private final int capacity;
   private final List<Ball> balls;
-  private final HashMap<Ball, Integer> ballsRegistry;
+  private final BallRegistry ballsRegistry;
 
-  public Bag() {
+  private Bag(BallRegistry registry) {
     this.capacity = 12;
     this.balls = new ArrayList<>();
-    this.ballsRegistry = createBallEntry();
+    this.ballsRegistry = registry;
 
   }
 
-  public HashMap<Ball, Integer> createBallEntry() {
-    HashMap<Ball, Integer> ballsRegistry = new HashMap<>();
-
-    ballsRegistry.put(Ball.GREEN, 3);
-    ballsRegistry.put(Ball.NORMAL, 12);
-    return ballsRegistry;
+  public static Bag createBag() {
+    return new Bag(BallRegistry.createBallRegistry());
   }
 
   public boolean add(Ball ball) {
@@ -29,13 +25,9 @@ public class Bag {
       return false;
     }
 
-    Integer ballCount = this.ballsRegistry.get(ball);
-
-    if (ballCount == 0) {
+    if (!this.ballsRegistry.register(ball)) {
       return false;
     }
-
-    this.ballsRegistry.put(ball, --ballCount);
 
     this.balls.add(ball);
     return true;
